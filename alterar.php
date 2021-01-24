@@ -289,7 +289,7 @@ else
 	<div class="form-actions">
 	<br/>
 		<button type="submit" class="btn btn-success">Adicionar</button>
-		<a href="index.php" type="btn" class="btn btn-default">Voltar</a>
+		<a href="index.php" type="btn" class="btn btn-outline-dark">Voltar</a>
 	</div>
 </form>
 	</div>
