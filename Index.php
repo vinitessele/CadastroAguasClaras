@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Cadastro de Alunos Águas Claras Youbukan II</title>
+		<title>Cadastro de Alunos Águas Claras Yobukan II</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 ''	</head>
@@ -9,7 +9,7 @@
 		<div class="container">
 			<div class="jumbotron">
 				<div class="d-flex justify-content-center">
-					<h2>Cadastro de Alunos Dojo Águas Claras Youbukan II</h2>
+					<h2>Cadastro de Alunos Dojo Águas Claras Yobukan II</h2>
 				</div>
 			</div>
 		</div>
