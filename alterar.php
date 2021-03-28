@@ -1,6 +1,11 @@
 <?php
 
 $id = null;
+$img1 ='';
+$img2 ='';
+$img3 ='';
+$img4 ='';
+$img5 ='';
 if (!empty($_GET['id'])) {
     $id = $_REQUEST['id'];
 }
@@ -17,6 +22,9 @@ if (!empty($_POST)) {
 
     $nome = $_POST['tNome'];
     $endereco = $_POST['tEndereco'];
+    $Mae = $_POST['tMae'];     
+    $Pai = $_POST['tPai'];     
+    $Peso = $_POST['tPeso']; 
     $telefone = $_POST['tTelefone'];
     $celular = $_POST['tCelular'];
     $email = $_POST['tEmail'];
@@ -25,7 +33,10 @@ if (!empty($_POST)) {
     $cep= $_POST['tCep'];
     $cidade= $_POST['tCidade'];
     $estado= $_POST['tEstado'];
-    $dt_nascimento= $_POST['tDtNascimento'];
+    $dt_nascimento   = ($_POST['tDtNascimento']);
+    $dt_nascimento   = date('Y-m-d', strtotime($dt_nascimento));
+    $dt_inicio   = ($_POST['tDtInicio']);
+    $dt_inicio   = date('Y-m-d', strtotime($dt_inicio));
     $nacionalidade= $_POST['tNacionalidade'];
     $profissao= $_POST['tProfissao'];
     $cpf= $_POST['tCPF']; 
@@ -67,8 +78,58 @@ if (!empty($_POST)) {
     $Dan7   = date('Y-m-d', strtotime($Dan7));
     $Dan8  = ($_POST['tDan8']);
     $Dan8   = date('Y-m-d', strtotime($Dan8));
-    
+  
+    $dir = "upload/"; 
 
+    $countImg = 1;
+
+    /*Aqui você verifica se o file está setado */
+    if (isset($_FILES['arquivo'])){
+        echo 'passou if';
+       foreach ($_FILES['arquivo']["name"] as $file => $key) {
+        echo 'Entrou For';
+       /*Aqui você evita de tentar enviar inputs vazios */
+          if (!empty($_FILES['arquivo']["name"][$file])) {
+             $extencao= strtolower(substr($_FILES['arquivo']["name"][$file],-4)); 
+             sleep(1);
+             if ($countImg == 1)
+                {
+                   $img1 = md5(time()) . $extencao;
+                   move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img1);
+                   echo "img1";
+                }
+                else if ($countImg == 2 )
+                {
+                   $img2 = md5(time()) . $extencao;
+                   move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img2);
+                   echo "img2";
+                }
+                else if ($countImg == 3 )
+                {
+                   $img3 = md5(time()) . $extencao;
+                   move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img3);
+                   echo "img3";
+                }
+                else if ($countImg == 4 )
+                {
+                   $img4 = md5(time()) . $extencao;
+                   move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
+                   echo "img4";
+                }
+                else if ($countImg == 5 )
+                {
+                   $img5 = md5(time()) . $extencao;
+                   move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img5);
+                   echo "img5";
+                }
+                $countImg++;
+             //echo $novo_nome;
+             //$new_name = date("Y.m.d-H.i.s") . $extencao;
+             //echo $new_name;
+       
+          }
+       }
+    }
     //Validação
     $validacao = true;
     if (empty($nome)) {
@@ -131,7 +192,17 @@ if (!empty($_POST)) {
                     Dan5='$Dan5',
                     Dan6='$Dan6',
                     Dan7='$Dan7',
-                    Dan8='$Dan8'
+                    Dan8='$Dan8',
+                    dt_inicio='$dt_inicio',
+                    arquivoRG='$img1',
+                    arquivoFoto='$img2',
+                    arquivoComResidencia='$img3', 
+                    arquivoUltimoCertificado='$img4',
+                    dt_inicio = '$dt_inicio',
+                    Mae = '$Mae',
+                    Pai = '$Pai',
+                    Peso = '$Peso',
+                    arquivo = '$img5' 
                     WHERE id ='$id'";
                     
             //echo  $sql_code;
@@ -176,7 +247,7 @@ else
 				<h1>Atualizar cadastro</h1>
             </div>
             <div class="card-body">
-<form action="alterar.php?id=<?php echo $id ?>" method="POST">
+<form action="alterar.php?id=<?php echo $id ?>" method="POST" enctype="multipart/form-data">
 	<fieldset id="cliente">
 		<legend>Identificação</legend>
         <p><label for="cNome">Nome:</label> 
@@ -185,11 +256,24 @@ else
 				
 			<p><label for="cEmail">E-mail:</label> 
 				<input type="email" class="form-control"  name="tEmail" id="cEmail" required value='<?php echo $linha['email'];?>' /></p>
-				
+
+            <p><label for="cMae">Nome da Mãe:</label> 
+				<input type="text" class="form-control"  name="tMae" id="cMae" value='<?php echo $linha['Mae'];?>'
+                placeholder="Nome da mãe" /></p>
+         
+             <p><label for="cPai">Nome do Pai:</label> 
+				<input type="text" class="form-control"  name="tPai" id="cPai" value='<?php echo $linha['Pai'];?>'
+                placeholder="Nome do Pai" /></p>
+
+             <p><label for="cPeso">Peso atual:</label> 
+				<input type="text" class="form-control"  name="tPeso" id="cPeso" value='<?php echo $linha['Peso'];?>'
+                placeholder="Peso atual" /></p>
+
+
 			<p><label for="cTelefone">Telefone:</label> 
 				<input type="text" class="form-control" name="tTelefone" id="cTelefone" value='<?php echo $linha['telefone'];?>' /></p>
 
-         <p><label for="cCelular">Celular:</label> 
+             <p><label for="cCelular">Celular:</label> 
 				<input type="text" class="form-control" name="tCelular" id="cCelular" value='<?php echo $linha['celular'];?>' required/></p>
 				
 			<p><label for="cEndereco">Endereço:</label> 
@@ -212,6 +296,9 @@ else
 
          <p><label for="cDataNascimento">Data de Nascimento:</label> 
 				<input data-mask='dd/mm/yyyy' type="date" class="form-control" name="tDtNascimento" id="cDataNascimento" value='<?php echo $linha['dt_nascimento']; ?>' /></p>
+        
+         <p><label for="cDataInicio">Data de início com o Karatê:</label> 
+            <input data-mask='dd/mm/yyyy' type="date" class="form-control" name="tDtInicio" id="cDataInicio" placeholder="Data inicio com o Karatê" /></p>   
             
          <p><label for="cNacionalidade">Nacionalidade:</label> 
 				<input type="text" class="form-control" name="tNacionalidade" id="cNacionalidade" value='<?php echo $linha['nacionalidade']; ?>' /></p>
@@ -284,6 +371,32 @@ else
          
          <p><label for="cDan8">Dan 8:</label> 
 				<input data-mask='dd/mm/yyyy' type="date" class="form-control" name="tDan8" id="cDan8" value='<?php echo $linha['Dan8']; ?>'/></p>
+
+
+      <p>
+         <label class="form-label" for="customFile">RG</label>
+         <input id="imgDoc" name="arquivo[]" type="file" class="file" data-show-preview="false">
+      </p>
+
+      <p>
+         <label class="form-label" for="customFile">Foto 3x4</label>
+         <input id="imgFoto" name="arquivo[]" type="file" class="file" data-show-preview="false">
+      </p>
+
+      <p>
+         <label class="form-label" for="customFile">Comprovante de residência</label>
+         <input id="imgComResidencia" name="arquivo[]" type="file" class="file" data-show-preview="false">
+      </p>
+
+      <p>
+         <label class="form-label" for="customFile">Último certificado</label>
+         <input id="imgUltCertificado" name="arquivo[]" type="file" class="file" data-show-preview="false">
+      </p>
+
+      <p>
+         <label class="form-label" for="customFile">Anexo</label>
+         <input id="img" name="arquivo[]" type="file" class="file" data-show-preview="false">
+      </p>
 
 	</fieldset>
 	<div class="form-actions">

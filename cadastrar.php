@@ -4,6 +4,7 @@ $img1 ='';
 $img2 ='';
 $img3 ='';
 $img4 ='';
+$img5 ='';
 
 if(isset($_POST['enviar-formulario'])){
    if (!empty($_POST['tNome'])) {
@@ -46,6 +47,11 @@ if(isset($_POST['enviar-formulario'])){
                      $img4 = md5(time()) . $extencao;
                      move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
                   }
+                  else if ($countImg == 5 )
+                  {
+                     $img5 = md5(time()) . $extencao;
+                     move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img5);
+                  }
                   $countImg++;
                //echo $novo_nome;
                //$new_name = date("Y.m.d-H.i.s") . $extencao;
@@ -56,7 +62,9 @@ if(isset($_POST['enviar-formulario'])){
          }
       }
 
-  
+$Mae = $_POST['tMae'];     
+$Pai = $_POST['tPai'];     
+$Peso = $_POST['tPeso'];     
 $complemento = $_POST['tComplemento'];
 $bairro  = $_POST['tBairro'];
 $cep = ($_POST['tCep']);
@@ -67,6 +75,8 @@ $celular  = ($_POST['tCelular']);
 $email  = ($_POST['tEmail']);
 $dt_nascimento   = ($_POST['tDtNascimento']);
 $dt_nascimento   = date('Y-m-d', strtotime($dt_nascimento));
+$dt_inicio   = ($_POST['tDtInicio']);
+$dt_inicio   = date('Y-m-d', strtotime($dt_inicio));
 $nacionalidade  = ($_POST['tNacionalidade']);
 $profissao   = ($_POST['tProfissao']);
 $professor  = ($_POST['tProfessor']) ;
@@ -135,7 +145,7 @@ $Dan8   = date('Y-m-d', strtotime($Dan8));
                                            Dan5,
                                            Dan6,
                                            Dan7,
-                                           Dan8) 
+                                           Dan8, dt_inicio, Mae, Pai, Peso, arquivo) 
                                            VALUES('$nome','$endereco','$complemento',
                                            '$bairro','$cep','$cidade','$estado',
                                            '$telefone','$celular','$email',
@@ -158,7 +168,7 @@ $Dan8   = date('Y-m-d', strtotime($Dan8));
                                            '$Dan5',
                                            '$Dan6',
                                            '$Dan7',
-                                           '$Dan8' )";
+                                           '$Dan8','$dt_inicio', '$Mae','$Pai','$Peso','$img5')";
         //echo $sql_code;
         $sql_query=$mysqli->query($sql_code) or die($mysqli->error);
         if($sql_query==true)
@@ -194,7 +204,8 @@ $Dan8   = date('Y-m-d', strtotime($Dan8));
 <form action="cadastrar.php" method="POST" enctype="multipart/form-data">
 	<fieldset id="Cadastro do Aluno">
 		<legend>Identificação</legend>
-			<p><label for="cNome">Nome:</label> 
+			
+         <p><label for="cNome">Nome:</label> 
 				<input type="text" class="form-control" name="tNome" 
 				id="cNome" placeholder="Insira seu nome" 
 				required name="tNome" title="Preencha o campo Nome***"/></p>
@@ -202,7 +213,19 @@ $Dan8   = date('Y-m-d', strtotime($Dan8));
 			<p><label for="cEmail">E-mail:</label> 
 				<input type="email" class="form-control"  name="tEmail" id="cEmail" 
                 placeholder="Insira seu e-mail" required/></p>
-				
+
+         <p><label for="cMae">Nome da Mãe:</label> 
+				<input type="text" class="form-control"  name="tMae" id="cMae" 
+                placeholder="Nome da mãe" /></p>
+         
+         <p><label for="cPai">Nome do Pai:</label> 
+				<input type="text" class="form-control"  name="tPai" id="cPai" 
+                placeholder="Nome do Pai" /></p>
+
+         <p><label for="cPeso">Peso atual:</label> 
+				<input type="text" class="form-control"  name="tPeso" id="cPeso" 
+                placeholder="Peso atual" /></p>
+
 			<p><label for="cTelefone">Telefone:</label> 
 				<input type="text" class="form-control" name="tTelefone" id="cTelefone" 
                placeholder="Insira seu telefone"/></p>
@@ -232,6 +255,9 @@ $Dan8   = date('Y-m-d', strtotime($Dan8));
          <p><label for="cDataNascimento">Data de Nascimento:</label> 
 				<input data-mask='dd/mm/yyyy' type="date" class="form-control" name="tDtNascimento" id="cDataNascimento" placeholder="Data Nascimento" /></p>
             
+         <p><label for="cDataInicio">Data de início com o Karatê:</label> 
+				<input data-mask='dd/mm/yyyy' type="date" class="form-control" name="tDtInicio" id="cDataInicio" placeholder="Data inicio com o Karatê" /></p>   
+         
          <p><label for="cNacionalidade">Nacionalidade:</label> 
 				<input type="text" class="form-control" name="tNacionalidade" id="cNacionalidade" placeholder="Nacionalidade" /></p>
             
@@ -239,7 +265,7 @@ $Dan8   = date('Y-m-d', strtotime($Dan8));
 				<input type="text" class="form-control" name="tProfissao" id="cProfissao" placeholder="Profissão" /></p>
             
          <p><label for="cCPF">CPF:</label> 
-				<input type="text" class="form-control" name="tCPF" id="cCPF" placeholder="CPF" /></p>
+				<input type="text" class="form-control" name="tCPF" id="cCPF" placeholder="CPF" required/></p>
             
          <p><label for="cRG">RG:</label> 
 				<input type="text" class="form-control" name="tRG" id="cRG" placeholder="RG" /></p>
@@ -324,6 +350,10 @@ $Dan8   = date('Y-m-d', strtotime($Dan8));
          <input id="imgUltCertificado" name="arquivo[]" type="file" class="file" data-show-preview="false">
       </p>
 
+      <p>
+         <label class="form-label" for="customFile">Anexo</label>
+         <input id="img" name="arquivo[]" type="file" class="file" data-show-preview="false">
+      </p>
 
      </fieldset>
 	<div class="form-actions">
