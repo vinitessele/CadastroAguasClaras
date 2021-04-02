@@ -51,7 +51,7 @@
 				$login = $_POST['login'];
 				$senha = $_POST['senha'];
 				$cpf   = $_POST['tCPF'];
-				if (empty($login) && empty($senha) )
+				if (empty($login) && empty($senha) && !empty($cpf))
 				{ 
 					$sql_code = "select * from cadastro where cpf='$cpf'";
 					$sql_query=$mysqli->query($sql_code) or die($mysqli->error);
@@ -103,7 +103,7 @@
 		<?php
 			if (!empty($linha['id'])){
 		?>
-			<table id="myTable2" class="sortable">
+			<table id="myTable2" class="table">
 			<tr>
 				<th>Id</th>
 				<th onclick="sortTable(0)">Nome</th>

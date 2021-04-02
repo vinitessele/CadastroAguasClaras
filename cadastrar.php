@@ -29,27 +29,27 @@ if(isset($_POST['enviar-formulario'])){
                sleep(1);
                if ($countImg == 1)
                   {
-                     $img1 = md5(time()) . $extencao;
+                     $img1 = md5(time()) .'.'. $extencao;
                      move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img1);
                   }
                   else if ($countImg == 2 )
                   {
-                     $img2 = md5(time()) . $extencao;
+                     $img2 = md5(time()) .'.'. $extencao;
                      move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img2);
                   }
                   else if ($countImg == 3 )
                   {
-                     $img3 = md5(time()) . $extencao;
+                     $img3 = md5(time()) .'.'. $extencao;
                      move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img3);
                   }
                   else if ($countImg == 4 )
                   {
-                     $img4 = md5(time()) . $extencao;
+                     $img4 = md5(time()) .'.'. $extencao;. $extencao;
                      move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
                   }
                   else if ($countImg == 5 )
                   {
-                     $img5 = md5(time()) . $extencao;
+                     $img5 = md5(time()) .'.'. $extencao;
                      move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img5);
                   }
                   $countImg++;

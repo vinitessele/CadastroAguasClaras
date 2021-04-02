@@ -85,42 +85,37 @@ if (!empty($_POST)) {
 
     /*Aqui você verifica se o file está setado */
     if (isset($_FILES['arquivo'])){
-        echo 'passou if';
+   
        foreach ($_FILES['arquivo']["name"] as $file => $key) {
-        echo 'Entrou For';
+     
        /*Aqui você evita de tentar enviar inputs vazios */
           if (!empty($_FILES['arquivo']["name"][$file])) {
              $extencao= strtolower(substr($_FILES['arquivo']["name"][$file],-4)); 
              sleep(1);
              if ($countImg == 1)
                 {
-                   $img1 = md5(time()) . $extencao;
+                  $img1 = md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img1);
-                   echo "img1";
                 }
                 else if ($countImg == 2 )
                 {
-                   $img2 = md5(time()) . $extencao;
+                   $img2 = md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img2);
-                   echo "img2";
                 }
                 else if ($countImg == 3 )
                 {
-                   $img3 = md5(time()) . $extencao;
+                   $img3 = md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img3);
-                   echo "img3";
                 }
                 else if ($countImg == 4 )
                 {
-                   $img4 = md5(time()) . $extencao;
+                   $img4 = md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
-                   echo "img4";
                 }
                 else if ($countImg == 5 )
                 {
-                   $img5 = md5(time()) . $extencao;
+                   $img5 = md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img5);
-                   echo "img5";
                 }
                 $countImg++;
              //echo $novo_nome;
@@ -228,7 +223,11 @@ else
 		$sql_query=$mysqli->query($sql_code) or die($mysqli->error);
 		$linha = $sql_query-> fetch_assoc();
 }
-
+$img1 = $linha['arquivoRG'];
+$img2 = $linha['arquivoFoto'];
+$img3 = $linha['arquivoComResidencia'];
+$img4 = $linha['arquivoUltimoCertificado'];
+$img5 = $linha['arquivo'];
 ?>
 <!DOCTYPE html>
 <html>
