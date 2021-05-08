@@ -44,7 +44,7 @@ if(isset($_POST['enviar-formulario'])){
                   }
                   else if ($countImg == 4 )
                   {
-                     $img4 = md5(time()) .'.'. $extencao;. $extencao;
+                     $img4 = md5(time()) .'.'. $extencao;
                      move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
                   }
                   else if ($countImg == 5 )
