@@ -28,31 +28,31 @@ if(isset($_POST['enviar-formulario'])){
                $extencao= strtolower(substr($_FILES['arquivo']["name"][$file],-4)); 
                sleep(1);
                if ($countImg == 1)
-                  {
-                     $img1 = md5(time()) .'.'. $extencao;
-                     move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img1);
-                  }
-                  else if ($countImg == 2 )
-                  {
-                     $img2 = md5(time()) .'.'. $extencao;
-                     move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img2);
-                  }
-                  else if ($countImg == 3 )
-                  {
-                     $img3 = md5(time()) .'.'. $extencao;
-                     move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img3);
-                  }
-                  else if ($countImg == 4 )
-                  {
-                     $img4 = md5(time()) .'.'. $extencao;
-                     move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
-                  }
-                  else if ($countImg == 5 )
-                  {
-                     $img5 = md5(time()) .'.'. $extencao;
-                     move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img5);
-                  }
-                  $countImg++;
+               {
+                 $img1 = 'RG'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
+                  move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img1);
+               }
+               else if ($countImg == 2 )
+               {
+                  $img2 = 'FT'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
+                  move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img2);
+               }
+               else if ($countImg == 3 )
+               {
+                  $img3 = 'CR'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
+                  move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img3);
+               }
+               else if ($countImg == 4 )
+               {
+                  $img4 = 'CT'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
+                  move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
+               }
+               else if ($countImg == 5 )
+               {
+                  $img5 = 'AN'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
+                  move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img5);
+               }
+               $countImg++;
                //echo $novo_nome;
                //$new_name = date("Y.m.d-H.i.s") . $extencao;
                //echo $new_name;

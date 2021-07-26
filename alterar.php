@@ -78,43 +78,43 @@ if (!empty($_POST)) {
     $Dan7   = date('Y-m-d', strtotime($Dan7));
     $Dan8  = ($_POST['tDan8']);
     $Dan8   = date('Y-m-d', strtotime($Dan8));
-  
     $dir = "upload/"; 
-
     $countImg = 1;
-
+     
     /*Aqui você verifica se o file está setado */
     if (isset($_FILES['arquivo'])){
    
        foreach ($_FILES['arquivo']["name"] as $file => $key) {
      
        /*Aqui você evita de tentar enviar inputs vazios */
+       echo $_FILES['arquivo']["name"][$file];
+       //echo $_FILES['arquivo']["id"][$file];
           if (!empty($_FILES['arquivo']["name"][$file])) {
              $extencao= strtolower(substr($_FILES['arquivo']["name"][$file],-4)); 
              sleep(1);
              if ($countImg == 1)
                 {
-                  $img1 = md5(time()) .'.'. $extencao;
+                  $img1 = 'RG'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img1);
                 }
                 else if ($countImg == 2 )
                 {
-                   $img2 = md5(time()) .'.'. $extencao;
+                   $img2 = 'FT'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img2);
                 }
                 else if ($countImg == 3 )
                 {
-                   $img3 = md5(time()) .'.'. $extencao;
+                   $img3 = 'CR'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img3);
                 }
                 else if ($countImg == 4 )
                 {
-                   $img4 = md5(time()) .'.'. $extencao;
+                   $img4 = 'CT'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img4);
                 }
                 else if ($countImg == 5 )
                 {
-                   $img5 = md5(time()) .'.'. $extencao;
+                   $img5 = 'AN'.'-'.$nome.'-'.md5(time()) .'.'. $extencao;
                    move_uploaded_file($_FILES['arquivo']["tmp_name"][$file], "$dir/".$img5);
                 }
                 $countImg++;
@@ -153,11 +153,11 @@ if (!empty($_POST)) {
         if ($validacao) 
         {
         $sql_code = "UPDATE cadastro set 
-					nome ='$nome', 
-					endereco = '$endereco', 
-					telefone = '$telefone', 
+					     nome ='$nome', 
+					     endereco = '$endereco', 
+					     telefone = '$telefone', 
                     celular =  '$celular',
-					email ='$email', 
+					     email ='$email', 
                     complemento = '$complemento',
                     bairro ='$bairro',
                     cep='$cep',
@@ -189,29 +189,24 @@ if (!empty($_POST)) {
                     Dan7='$Dan7',
                     Dan8='$Dan8',
                     dt_inicio='$dt_inicio',
-                    arquivoRG='$img1',
-                    arquivoFoto='$img2',
-                    arquivoComResidencia='$img3', 
-                    arquivoUltimoCertificado='$img4',
                     dt_inicio = '$dt_inicio',
                     Mae = '$Mae',
                     Pai = '$Pai',
                     Peso = '$Peso',
-                    arquivo = '$img5' 
                     WHERE id ='$id'";
                     
             //echo  $sql_code;
             $sql_query=$mysqli->query($sql_code) or die($mysqli->error);
-                if($sql_query==true)
-                {
-                echo   '<div class="alert alert-success">
-                        <strong>Sucesso!</strong> Atualização realizado com sucesso.
-                        </div>';
-                }
-                else
-                {
-                    echo ''.mysql_error();
-                }
+            if($sql_query==true)
+            {
+               echo  '<div class="alert alert-success">
+                     <strong>Sucesso!</strong> Atualização realizado com sucesso.
+                     </div>';
+            }
+            else
+            {
+               echo ''.mysql_error();
+            }
             $sql_code = "select * from cadastro where id='$id'";
             $sql_query=$mysqli->query($sql_code) or die($mysqli->error);
             $linha = $sql_query-> fetch_assoc();
